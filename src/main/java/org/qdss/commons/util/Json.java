@@ -35,7 +35,6 @@ import org.apache.commons.lang.math.NumberUtils;
  * 
  * @deprecated Using {@link Bean2Json}
  */
-@Deprecated
 public class Json implements Serializable {
 	private static final long serialVersionUID = -7618723160926131245L;
 	
