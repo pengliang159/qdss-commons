@@ -28,12 +28,11 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 /**
- * JSON Entry and helper
+ * JSON Entry and helper.
+ * Using {@link Bean2Json}
  * 
  * @author <a href="mailto:zhaofang123@gmail.com">Fangfang Zhao</a>
  * @version $Id: Json.java 106 2012-12-24 06:50:51Z zhaofang123@gmail.com $
- * 
- * @deprecated Using {@link Bean2Json}
  */
 public class Json implements Serializable {
 	private static final long serialVersionUID = -7618723160926131245L;

@@ -27,7 +27,6 @@ import junit.framework.TestCase;
  * @since 0.2, 2010-11-8
  * @version $Id: JsonTest.java 105 2012-12-24 03:35:06Z zhaofang123@gmail.com $
  */
-@SuppressWarnings("deprecation")
 public class JsonTest extends TestCase {
 
 	public void testIsNumber() throws Exception {
