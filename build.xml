@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- =============================================================== -->
+<!-- Ant own build file                                              -->
+<!-- =============================================================== -->
+
+<project name="qdss-commons" default="jar" basedir=".">
+	<property name="vendor" value="QDSS.org" />
+	<property name="name" value="org.qdss.commons" />
+	<property name="version" value="0.1" />
+
+	<property name="src" value="${basedir}/src/main/java" />
+	<property name="lib" value="${basedir}/../libs" />
+	<property name="target" value="${basedir}/built" />
+	<property name="classes" value="${target}/classes" />
+	<property name="javadocs" value="${target}/javadocs" />
+
+	<!-- ============================================================= -->
+	<!-- Classpath with libraries needed to compile this application   -->
+	<!-- ============================================================= -->
+	<path id="compile.classpath">
+		<fileset dir="${lib}">
+			<include name="**/*.jar" />
+			<include name="**/*.zip" />
+		</fileset>
+	</path>
+
+	<!-- ============================================================= -->
+	<!-- Prepares the project                                          -->
+	<!-- ============================================================= -->
+	<target name="prepare" depends="clean">
+		<defaultexcludes echo="false" add="**/*.nbattrs" />
+
+		<mkdir dir="${target}" />
+		<mkdir dir="${classes}" />
+	</target>
+
+	<!-- ============================================================= -->
+	<!-- Compiles the source code                                      -->
+	<!-- ============================================================= -->
+	<target name="compile" depends="prepare">
+		<javac srcdir="${src}" destdir="${classes}" debug="on" optimize="on" target="1.5" source="1.5" encoding="UTF-8">
+			<classpath refid="compile.classpath" />
+		</javac>
+
+		<!-- Copy resources to the classes directory 
+		<copy todir="${classes}">
+			<fileset dir="${conf}">
+				<include name="**/*.dtd" />
+				<include name="**/*.xml" />
+			</fileset>
+		</copy>-->
+	</target>
+
+	<!-- ============================================================= -->
+	<!-- Clean up all files that are generated.                        -->
+	<!-- ============================================================= -->
+	<target name="clean">
+		<delete quiet="true" dir="${classes}" />
+		<delete quiet="true" dir="${javadocs}" />
+		<delete file="${target}/${name}-${version}.jar" />
+	</target>
+
+	<!-- ============================================================= -->
+	<!-- Create the jar file                                           -->
+	<!-- ============================================================= -->
+	<target name="jar" depends="compile">
+		<jar jarfile="${target}/${name}-${version}.jar">
+			<manifest>
+				<attribute name="Built-By" value="${vendor}" />
+				<section name="${name}">
+					<attribute name="Implementation-Title" value="${name}" />
+					<attribute name="Implementation-Version" value="${version}" />
+					<attribute name="Implementation-Vendor" value="${vendor}" />
+				</section>
+			</manifest>
+			<fileset dir="${classes}" />
+		</jar>
+		
+		<delete quiet="true" dir="${classes}" />
+	</target>
+
+	<!-- ============================================================= -->
+	<!-- Creates the API documentation                                 -->
+	<!-- ============================================================= -->
+	<target name="javadocs" depends="compile">
+		<mkdir dir="${javadocs}" />
+		<javadoc packagenames="*" sourcepath="${src}" destdir="${javadocs}" author="true" version="true" windowtitle="${name} API" doctitle="${name}" use="true" bottom="Copyright &#169; 2007-2009 by QDSS.org All Rights Reserved." />
+	</target>
+</project>
