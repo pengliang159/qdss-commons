@@ -79,10 +79,10 @@ public class ShortUrl {
 	public static String shortUrl(String url) {
 		try {
 		    // iphone新浪微博客户端 App Key：5786724301
-		    // iPad新浪客户端App Key：2849184197
+			//  weico.iphone版  App Key：82966982
 			String to = String.format(
 					"http://api.weibo.com/2/short_url/shorten.json?source=%d&url_long=%s",
-					new Random().nextBoolean() ? 5786724301L : 2849184197L,
+					new Random().nextBoolean() ? 82966982L : 5786724301L,
 					CodecUtils.urlEncode(url));
 			String result = HttpClientExec.getInstance().executeGet(to);
 			String split[] = result.split("http://t.cn");
